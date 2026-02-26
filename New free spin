@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mood Ripple Spin 1/100</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #ffffff; /* White background */
+}
+h2 {
+  margin-top: 20px;
+  color: black;
+}
+.wheel-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 30px;
+}
+#wheel {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 8px solid black;
+  transition: transform 4s ease-out;
+}
+#middlePic {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+  border-radius: 10px;
+}
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  background: black;
+  color: white;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+}
+#result {
+  margin-top: 15px;
+  font-size: 22px;
+  color: black;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<h2>🔥 MOOD RIPPLE SPIN 🔥</h2>
+
+<div class="wheel-container">
+  <img id="wheel" src="https://i.imgur.com/wheel-image.png">
+  <img id="middlePic" src="https://raw.githubusercontent.com/niloysir4-netizen/Mood-ripple-spin-free/main/file_00000000c4ac720885d038360cda230e.png">
+</div>
+
+<button onclick="spin()">SPIN NOW</button>
+<div id="result"></div>
+
+<script>
+// Rewards with 1/100 probability system
+let rewards = [
+  {label: "💎 100 Diamonds", chance: 1},  // 1/100
+  {label: "💎 50 Diamonds", chance: 2},
+  {label: "💎 25 Diamonds", chance: 5},
+  {label: "❤️ Extra Life", chance: 10},
+  {label: "🎮 Custom Room", chance: 82}  // remaining probability
+];
+
+// function to get random reward
+function getRandomReward() {
+  let random = Math.floor(Math.random() * 100) + 1; // 1-100
+  let total = 0;
+  for (let i=0; i<rewards.length; i++) {
+    total += rewards[i].chance;
+    if (random <= total) return rewards[i].label;
+  }
+  return "Try Again ❌";
+}
+
+// Spin function
+function spin() {
+  let wheel = document.getElementById("wheel");
+  let resultBox = document.getElementById("result");
+
+  let randomDeg = 3600 + Math.floor(Math.random() * 360);
+  wheel.style.transform = "rotate(" + randomDeg + "deg)";
+
+  setTimeout(() => {
+    resultBox.innerHTML = "🎉 Reward: " + getRandomReward();
+  }, 4000);
+}
+</script>
+
+</body>
+</html>
